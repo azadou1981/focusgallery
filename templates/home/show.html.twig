@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ photo.title }}{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row g-5">
+
+        <!-- Image à gauche (avec ombre) -->
+        <div class="col-lg-7">
+            <div class="bg-white p-4 rounded-4 shadow" 
+                 style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" 
+                     class="img-fluid rounded-3" 
+                     alt="{{ photo.title }}"
+                     style="width: 100%; height: auto;">
+            </div>
+        </div>
+
+        <!-- Infos à droite (avec ombre) -->
+        <div class="col-lg-5">
+            <div class="bg-white p-4 rounded-4 shadow" 
+                 style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                
+                <h1 class="fw-bold mb-3">{{ photo.title }}</h1>
+                
+                <!-- Badge rond -->
+                <div class="d-flex align-items-center mb-4">
+                    <span class="rounded-circle d-inline-block me-2" 
+                          style="width: 16px; height: 16px; background-color: {{ photo.category.color }};"></span>
+                    <span class="fw-medium fs-5">{{ photo.category.name }}</span>
+                </div>
+                
+                <div class="lead text-muted">
+                    {{ photo.description|raw }}
+                </div>
+
+                <a href="{{ path('app_home') }}" 
+                   class="btn btn-light border rounded-pill px-4 mt-5">
+                    ← Retour à galerie
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
