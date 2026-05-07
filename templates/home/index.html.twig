@@ -8,41 +8,41 @@
     <h1 class="text-center display-4 fw-bold mb-2">Découvrez nos clichés</h1>
     <p class="text-center text-muted mb-5">Explorez notre collection de photographies</p>
 
-    <!-- Catégories (style pill) -->
+    <!-- Filtres -->
     <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
         <a href="{{ path('app_home') }}" class="btn btn-outline-secondary rounded-pill px-4">Tous</a>
-        
         {% for category in categories %}
-            <a href="#" 
-               class="btn rounded-pill px-4"
+            <a href="#" class="btn rounded-pill px-4" 
                style="background-color: {{ category.color }}; color: white;">
                 {{ category.name }}
             </a>
         {% endfor %}
     </div>
 
-    <!-- Grille Photos -->
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Cartes avec titre + catégorie sur la même ligne -->
+    <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for photo in photos %}
             <div class="col">
-                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
-                    <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" 
-                         class="card-img-top"
-                         alt="{{ photo.title }}"
-                         style="height: 280px; object-fit: cover;">
-                    
+                <div class="card h-100 border-0 rounded-4 overflow-hidden d-flex flex-column" 
+                     style="box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);">
+
+                    <!-- Container blanc autour de l'image -->
+                    <div class="bg-white p-3">
+                        <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" 
+                             class="img-fluid rounded-3" 
+                             alt="{{ photo.title }}"
+                             style="height: 420px; width: 100%; object-fit: cover;">
+                    </div>
+
                     <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-3">{{ photo.title }}</h5>
-                        
-                        <span class="badge rounded-pill px-3 py-2 mb-4" 
-                              style="background-color: {{ photo.category.color }}; color: white;">
-                            {{ photo.category.name }}
-                        </span>
-                        
-                        <a href="{{ path('app_photo_show', {id: photo.id}) }}" 
-                           class="btn btn-dark rounded-pill w-100">
-                            Voir
-                        </a>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title fw-bold mb-0">{{ photo.title }}</h5>
+                            
+                            <span class="badge rounded-pill px-3 py-1 ms-2" 
+                                  style="background-color: {{ photo.category.color }}; color: white; font-size: 0.75rem; white-space: nowrap;">
+                                {{ photo.category.name }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
