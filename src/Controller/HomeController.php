@@ -21,6 +21,17 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/category/{id}', name: 'app_category', methods: ['GET'])]
+    public function category(
+        \App\Entity\Category $category,
+        CategoryRepository $categoryRepository
+    ): Response {
+        return $this->render('home/index.html.twig', [
+            'photos' => $category->getPhotos(),
+            'categories' => $categoryRepository->findAll(),
+        ]);
+    }
+
     #[Route('/photo/{id}', name: 'app_photo_show', methods: ['GET'])]
     public function show(\App\Entity\Photo $photo): Response
     {
